@@ -32,7 +32,7 @@ public class DownloadInstaller : Form {
         } catch(Exception ex) { if(args.Length==0) MessageBox.Show(ex.Message,"ZLauncher"); return 1; }
     }
     public static void ValidateManifest(Manifest m) {
-        if(m==null || m.BaseUrl!="https://github.com/arthurnazareth/zlauncher/releases/download/v3.4.0/" || m.GameBaseUrl!="https://github.com/arthurnazareth/zlauncher/releases/download/v3.2.2/" || m.GameName!="ZLauncher-42.21.bxdata" || m.Files==null || m.Files.Count!=6) throw new IOException("Manifesto inválido.");
+        if(m==null || m.BaseUrl!="https://github.com/arthurnazareth/zlauncher/releases/download/v3.4.1/" || m.GameBaseUrl!="https://github.com/arthurnazareth/zlauncher/releases/download/v3.2.2/" || m.GameName!="ZLauncher-42.21.bxdata" || m.Files==null || m.Files.Count!=6) throw new IOException("Manifesto inválido.");
         foreach(var a in m.Files) if(Path.GetFileName(a.Name)!=a.Name || a.Name.Contains(":") || a.Bytes<=0 || a.Bytes>=2L*1024*1024*1024 || !System.Text.RegularExpressions.Regex.IsMatch(a.Sha256??"","^[A-Fa-f0-9]{64}$")) throw new IOException("Arquivo inválido no manifesto.");
         if(m.Files.Select(a=>a.Name).Distinct().Count()!=m.Files.Count || m.Files.Where(a=>a.Part).Sum(a=>a.Bytes)!=m.GameBytes || !System.Text.RegularExpressions.Regex.IsMatch(m.GameSha256??"","^[A-Fa-f0-9]{64}$")) throw new IOException("Partes inconsistentes.");
     }
@@ -40,7 +40,7 @@ public class DownloadInstaller : Form {
         manifest=m; Text="ZLauncher • Preparar instalação"; ClientSize=new Size(640,350); MinimumSize=MaximumSize=Size;
         StartPosition=FormStartPosition.CenterScreen; BackColor=Color.FromArgb(23,25,27); ForeColor=Color.WhiteSmoke; Font=new Font("Segoe UI",10);
         var title=new Label { Text="Instalar ZLauncher",Font=new Font("Segoe UI Semibold",24),Bounds=new Rectangle(28,22,580,48) };
-        var info=new Label { Text="Launcher 3.4.0 + Build 42.21\nBaixa cerca de 5,3 GB do GitHub. Reserve 11 GB para preparar o pacote.",ForeColor=Color.Silver,Bounds=new Rectangle(30,80,580,55) };
+        var info=new Label { Text="Launcher 3.4.1 + Build 42.21\nBaixa cerca de 5,3 GB do GitHub. Reserve 11 GB para preparar o pacote.",ForeColor=Color.Silver,Bounds=new Rectangle(30,80,580,55) };
         destination.SetBounds(30,150,470,29); destination.Text=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),"Instalador ZLauncher");
         browse.Text="Escolher…"; browse.SetBounds(510,148,100,33); browse.Click+=(s,e)=> { using(var d=new FolderBrowserDialog()) { d.SelectedPath=destination.Text; if(d.ShowDialog(this)==DialogResult.OK) destination.Text=d.SelectedPath; } };
         status.Text="Escolha onde guardar o instalador completo."; status.SetBounds(30,200,580,42);
@@ -64,7 +64,7 @@ public class DownloadInstaller : Form {
         string temp=path+".partial";
         for(int attempt=1;attempt<=3;attempt++) {
             try {
-                var request=(HttpWebRequest)WebRequest.Create((asset.Part?manifest.GameBaseUrl:manifest.BaseUrl)+Uri.EscapeDataString(asset.Name)); request.UserAgent="ZLauncher-Installer/3.4.0"; request.Timeout=60000; request.ReadWriteTimeout=60000;
+                var request=(HttpWebRequest)WebRequest.Create((asset.Part?manifest.GameBaseUrl:manifest.BaseUrl)+Uri.EscapeDataString(asset.Name)); request.UserAgent="ZLauncher-Installer/3.4.1"; request.Timeout=60000; request.ReadWriteTimeout=60000;
                 using(token.Register(()=>request.Abort()))
                 using(var response=request.GetResponse()) using(var from=response.GetResponseStream()) using(var to=File.Create(temp)) {
                     byte[] buffer=new byte[1024*1024]; long read=0; int n; var timer=Stopwatch.StartNew();
