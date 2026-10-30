@@ -4,6 +4,8 @@ Launcher para Project Zomboid, com perfis de mods, integração com a Workshop e
 
 ## Atualizar sem reinstalar o jogo
 
+A versão 3.4.1 corrige a prioridade do ZombieBuddy em servidores locais cuja seleção difere do perfil do menu. O launcher preserva os mods do servidor e grava backup antes de ajustar a ordem. Feche e reabra o jogo pelo launcher após atualizar.
+
 Se você já tem o ZLauncher, baixe somente [ZLauncher.Updater.exe](https://github.com/arthurnazareth/zlauncher/releases/latest/download/ZLauncher.Updater.exe).
 
 1. Feche o launcher antigo.
@@ -22,14 +24,14 @@ Os arquivos `src/UpdateCore.cs`, `src/UpdaterProgram.cs` e `src/UpdateTests.cs` 
 
 ## Instalar
 
-1. Abra a [release 3.4.0](https://github.com/arthurnazareth/zlauncher/releases/tag/v3.4.0).
+1. Abra a [release 3.4.1](https://github.com/arthurnazareth/zlauncher/releases/tag/v3.4.1).
 2. Baixe **Instalar-ZLauncher.exe** e execute-o no Windows.
 3. Escolha uma pasta e clique em **Baixar e instalar**.
 4. Aguarde o download e a verificação do pacote; o instalador completo abrirá em seguida.
 
 O preparador baixa aproximadamente 5,3 GB. Reserve 11 GB para preparar os arquivos e cerca de 10 GB adicionais para instalar a build. Depois de instalar, o pacote baixado pode ser guardado em outro disco.
 
-O pacote inclui ZLauncher 3.4.0, instalador 1.2.2, Build 42.21, ZombieBuddy 2.3.4 e os assistentes oficiais do Visual C++ x64 e da Steam. A Steam precisa de internet para atualizar e de login feito pelo usuário. O Windows poderá pedir autorização para instalar pré-requisitos.
+O pacote inclui ZLauncher 3.4.1, instalador 1.2.2, Build 42.21, ZombieBuddy 2.3.4 e os assistentes oficiais do Visual C++ x64 e da Steam. A Steam precisa de internet para atualizar e de login feito pelo usuário. O Windows poderá pedir autorização para instalar pré-requisitos.
 
 O arquivo grande é distribuído em três partes porque o GitHub limita o tamanho de cada asset. O preparador reúne as partes e verifica SHA-256; não é necessário juntá-las manualmente. Os arquivos `.part001` a `.part003` não são instaladores independentes.
 
@@ -56,4 +58,4 @@ Importar lista inicia automaticamente os downloads, incluindo mods desativados. 
 
 Em Perfis, use Renomear ou Apagar modpack. Apagar um perfil preserva mods e saves. Em Meus mods, Remover mod guarda os arquivos em Backups e atualiza os perfis da mesma biblioteca. Dependências ativas precisam ser desativadas antes da remoção.
 
-O preparador reutiliza as três partes do pacote da build publicadas em v3.2.2 e baixa o instalador atualizado de v3.4.0; todos os arquivos são conferidos por SHA-256.
+O preparador reutiliza as três partes do pacote da build publicadas em v3.2.2 e baixa o instalador atualizado de v3.4.1; todos os arquivos são conferidos por SHA-256.
