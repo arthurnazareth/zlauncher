@@ -1,4 +1,4 @@
-#if STANDALONE_UPDATER
+﻿#if STANDALONE_UPDATER
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,7 +20,7 @@ static class UpdateTests {
         foreach(string name in new[]{"ZLauncher.exe","ZLauncher.Updater.exe"}) File.Copy(Assembly.GetExecutingAssembly().Location,Path.Combine(files,name));
         Put(files,"ZLauncher.exe.config","new config"); Put(files,"ZLauncher.Updater.exe.config","new config"); Put(files,"ModsLauncher/src/UpdateCore.cs","fixture source");
         zip=Path.Combine(work,"update.zip"); ZipFile.CreateFromDirectory(files,zip);
-        return new UpdateManifest { Format=1,Version="3.4.0",PackageBytes=new FileInfo(zip).Length,PackageSha256=UpdateCore.Hash(zip),Files=Directory.GetFiles(files,"*",SearchOption.AllDirectories).Select(f=>new UpdateFile { Path=f.Substring(files.Length+1).Replace('\\','/'),Bytes=new FileInfo(f).Length,Sha256=UpdateCore.Hash(f) }).ToList() };
+        return new UpdateManifest { Format=1,Version=Assembly.GetExecutingAssembly().GetName().Version.ToString(3),PackageBytes=new FileInfo(zip).Length,PackageSha256=UpdateCore.Hash(zip),Files=Directory.GetFiles(files,"*",SearchOption.AllDirectories).Select(f=>new UpdateFile { Path=f.Substring(files.Length+1).Replace('\\','/'),Bytes=new FileInfo(f).Length,Sha256=UpdateCore.Hash(f) }).ToList() };
     }
     public static int Run(string output) {
         Directory.CreateDirectory(output); string area=Path.Combine(output,Guid.NewGuid().ToString("N")); Directory.CreateDirectory(area); log=new List<string>();
